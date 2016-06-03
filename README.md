@@ -64,7 +64,7 @@ See the LICENSE file for details.
 This script is a modification of following script.
 
 **voronoi_from_selection.jsx**  
-[https://github.com/fabiantheblind/Illustrator-Javascript-Voronoi](https://github.com/fabiantheblind/Illustrator-Javascript-Voronoi)
+[https://github.com/fabiantheblind/Illustrator-Javascript-Voronoi](https://github.com/fabiantheblind/Illustrator-Javascript-Voronoi)  
 Copyright (c)  2012 Fabian "fabiantheblind" Moron Zirfas  
 Licensed under The MIT License
 
