@@ -1,109 +1,78 @@
-#Bringing Voronoi To Adobe Illustrator  
-this is a AI CS5 (Extend)script collection for generating Voronoi diagrams in Adobe Illustrator.  
-The Voronoi implementation is taken from [gorhills javascript-voronoi port at github](https://github.com/gorhill/Javascript-Voronoi)   
-Thanx a lot for this MIT licensed code.  
-  
-##Getting Started    
-to see what is happening just [download the whole package](https://github.com/fabiantheblind/Illustrator-Javascript-Voronoi/zipball/master). Run the script from Illustrator by hitting **CMD+F12 (on Mac) or STRG+F12 (on Win)** and selecting the file **voronoi_basic.jsx.** Or download the file [rhill-voronoi-core.js"](https://raw.github.com/gorhill/Javascript-Voronoi/master/rhill-voronoi-core.js) and paste the code below into a new file that lies next to the rhill-voronoi-core.js.  
-The function util_inspect_properties(f) works with the [Extend Script Toolkit](http://www.adobe.com/devnet/scripting.html) console.
+**Use Download button (on the right side of this page) to download.**  
+**If you use right click on each file to save, you'll get an HTML file.**
 
-	#include "rhill-voronoi-core.js"
-	var voronoi = new Voronoi();  
-	var bbox = {xl:0,xr:800,yt:0,yb:600};  
-	var vertices = [{x:200, y:200}, {x:50, y:250}, {x:400, y:100} /* , ... */];  
-	// a 'vertex' is an object exhibiting 'x' and 'y' properties. The  
-	// Voronoi object will add a unique 'voronoiId' property to all  
-	// vertices. The 'voronoiId' can be used as a key to lookup the  
-	// associated cell in 'diagram.cells'.  
-	var diagram = voronoi.compute(vertices, bbox);
-	    
-	// now inspect the code with the function util_inspect_properties
-	// by Peter "the Magnificant" Kahrel  
-	// http://www.kahrel.plus.com/indesign/scriptui.html   
-	// look under "Displaying properties and methods"  
-	$.writeln (util_insepct_properties(result.cells[0].site));
-	  
-	function  util_inspect_properties (f) {  
-	$.writeln (f.reflect.name);
-	var props = f.reflect.properties;
-	var array = [];
-	for (var i = 0; i < props.length; i++)
-	try {array.push (props[i].name + ": " + f[props[i].name])} catch (_){}
-	array.sort ();  
-	$.writeln (array.join ("\r"));
-	}
-  
-#Examples
-There are three of them
-###voronoi_basic.jsx
-As mentioned above it builds the basic example by gorhill in Illustrator    
-  
-  
-    
-All the examples below use *only* the path points. Curves dont get calculated. If you want to reflect curves - add pathpoints along it! [(have a look at this)](http://preview.tinyurl.com/78yg4ht)
-	
-###voronoi.jsx
-a more complex graphic is created with this script. It uses the Unibody 8 SmallCaps Regular font from [underware](http://www.underware.nl/)   
-###voronoi_fromSelection.jsx
-The "voronoi_fromSelection.jsx" script takes the selection from the active document and copies it to a new document with the same size as the source document. Than comes the magic…  
-  
-It works with text, path items and compound paths.
-The best thing is to release all artworks (at least roughly) to simple path items. Than select the graphic you want to convert to a diagram. 
-(Not tested yet with mesh items, symbols, raster items, graph items or placed items)  
-Than the copied items will be transformed. The script will try to release all groups and compound paths turn text into outlines. But if you want to save some time do it yourself.    
-#####User Interaction - Step by Step   
-1. release as much compound paths as possible  
-2. turn text to outlines    
-3. release all groups   
-4. select your graphic  
-5. run the script  
-Depending on how many points you process* you can make some coffee or watch the script working for you    
-  
-#####Transformations
-These are the transformations that occur:
-      
-- copies selection to a new document with the same size as the source doc
-- textFrames get converted to outlines  
-- groups get ungrouped using [this code (ungroupV1.js)](http://forums.adobe.com/thread/456042) by Nokcha  
-- all compound paths get released [based on this example](http://forums.adobe.com/message/2140054)   
-- calculates the diagram  
-- locks the original layer and makes it invisible  
-- creates a layer with the edges  
-- calculates cell colors based on hsl circle or randomly   
-- creates a layer with the cells
-- creates a layer with the sites  
-  
-#####Options  
-In the top of the script are some global variables:  
-    
-- COLOREDCELLS -> if true all cells get colored randomly  
-- HSBCOLORSCELLS -> if true the colors are on the hsb circle  
-- STROKEDCELLS -> if true all cells get a black stroke  
-- DRAWCELLS -> if true it creates a layer with the cells  
-- DRAWEDGES -> if true it creates a layer with the edges   
-- DRAWSITES -> if true it creates a layer with the sites
-- ANGLEOFFSET -> define the starting point of the hsl angle  
-- ANGLE =  -> define the range of the angle  
-- SATURATION -> …  
-- LIGHTNESS -> …    
-  
-#####Video 2 voronoi_fromSelection.jsx
-See the video here[https://vimeo.com/38493279](https://vimeo.com/38493279)  
-  
-#####License  
-Same as gorhill. This code is under MIT License.  
-This product includes software developed by netbluew@nate.com and its contributors  
-([ungroupV1.js](http://forums.adobe.com/thread/456042) by Nokcha).  
-  
-Copyright (c)  2012 Fabian "fabiantheblind" Morón Zirfas  
-    
-Permission is hereby granted, free of charge, to any person obtaining a copy of thissoftware and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:  
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.  
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.  
-see also http://www.opensource.org/licenses/mit-license.php
 
-#*Be aware of your pathPoints.length
-Use this code:  
+This is a more practical (just for me) modification of well known voronoi script by
+[@fabiantheblind](https://github.com/fabiantheblind/Illustrator-Javascript-Voronoi)
+using the voronoi library by
+[@gorhill](https://github.com/gorhill/Javascript-Voronoi).  
+Please see the original repositories for more fantastic use cases and usage of the library.  
 
-	    var count = 0;      	for (var i =0; i < app.activeDocument.selection.length;i++){      	try{count+=app.activeDocument.selection[i].pathPoints.length;}catch(e){}    	};	    alert("you have "+count+ " pathpoints in your selection");  
+**test environment**:  
+Adobe Illustrator CC 2015 (Mac) ... ok  
+Adobe Illustrator CS3 (Win) ... It needs to modify "include" directive. See inside "lib" folder for details.
+
+voronoi_from_selected_objects.jsx
+======================
+This script draws a Voronoi diagram based on the central coordinate of each object in current selection.  
+The object which has the largest size (width or height) in the selection is used for the bounds for drawing.
+(Therefore, **make sure** to include the object becoming the bounds (=frame) in the selection.  This object is excluded from the targets for the Voronoi calculation.)  The objects located outside of this bounds are ignored.  
+The lines drawn are put into a group.  And the filled paths are put into another group.
+
+**Note**: This script requires '**rhill-voronoi-core.js**' (by
+[@gorhill](https://github.com/gorhill/Javascript-Voronoi)
+) included in this repo.
+You need to place it under the "lib" folder under "Scripts" folder of Adobe Illustrator.
+
+Again, it uses the central coordinate of each "object". It can be various type in Illustrator, like the following image.
+
+![desc_voronoi_various_objects](https://github.com/shspage/Illustrator-Javascript-Voronoi/raw/master/img/desc_voronoi_various_objects.png)
+
+Note that the grouped object is recognized as one object.  
+In this case, "object" means an object which is selected with a click using Select Tool (black arrow).  
+You can release groups before you run the script.  But if the script force releasing groups,
+you can do nothing, even if you don't want to release them.
+So this script doesn't extract objects from groups at all.
+Please be careful about the construction of groups in the selection.
+If there are less than 3 "objects" in the selection, this script do nothing.
+
+
+The filled paths are painted in white.  The following image is an example which used 
+[noiseFill.jsx](https://github.com/shspage/illustrator-scripts/blob/master/noiseFill.jsx)
+ to modify the color after making the Voronoi diagram.
+
+![desc_voronoi_example](https://github.com/shspage/Illustrator-Javascript-Voronoi/raw/master/img/desc_voronoi_example.png)
+
+
+## changes from the original
+* uses the central coordinate of each object in the selection
+* draws on the current artboard
+* uses the largest object in the selection as an outer frame
+* groups and compoundpaths are not released
+* text objects are not outlined
+* removed coloring options inside the script
+* added UI which has a checkbox
+* updated the library to the current version
+
+----------------------
+## License
+Copyright(c) 2016 Hiroyuki Sato  
+[https://github.com/shspage](https://github.com/shspage)  
+This script is distributed under the MIT License.  
+See the LICENSE file for details.  
+
+This script is a modification of following script.
+
+**voronoi_from_selection.jsx**  
+[https://github.com/fabiantheblind/Illustrator-Javascript-Voronoi](https://github.com/fabiantheblind/Illustrator-Javascript-Voronoi)
+Copyright (c)  2012 Fabian "fabiantheblind" Moron Zirfas  
+Licensed under The MIT License
+
+This software uses the following library that may have a license differing from that of the software itself.
+You can find the library and its respective license below.
+
+**rhill-voronoi-core.js**  
+[https://github.com/gorhill/Javascript-Voronoi](https://github.com/gorhill/Javascript-Voronoi)  
+Licensed under The MIT License  
+Copyright (c) 2010-2013 Raymond Hill
   
