@@ -52,7 +52,7 @@ The filled paths are painted in white.  The following image is an example which 
 * text objects are not outlined
 * removed coloring options inside the script
 * added UI which has a checkbox
-* updated the library to the current version
+* updated the library to the current version, and moved it under "lib" folder
 
 ----------------------
 ## License
