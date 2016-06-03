@@ -17,8 +17,8 @@ You can change the file extension of these.  In this case, make sure to change #
 include path
 ======================
 In the older version of Illustrator, a folder under "Scripts" folder is not recognized as an include-path.
-One of the solutions is to use HOME folder. ("C:\User\<user name>" in Windows)
-If you put "mylibrary.js" under "C:\User\<user name>\lib", it is recognized with following directive.
+One of the solutions is to use HOME folder. ("C:\Users\\<user name>" in Windows)
+If you put "mylibrary.js" under "C:\Users\\<user name>\lib", it is recognized with following directive.
 
 ```javascript
 #include "~/lib/mylibrary.js"
@@ -26,7 +26,7 @@ If you put "mylibrary.js" under "C:\User\<user name>\lib", it is recognized with
 
 
 Hiroyuki Sato  
-[htts://github.com/shspage](htts://github.com/shspage)
+[https://github.com/shspage](https://github.com/shspage)
 
 ----------------------
 **Copyright Notice**
